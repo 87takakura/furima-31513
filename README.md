@@ -30,6 +30,7 @@
 | category_id | integer   | null: false |
 | state_id    | integer   | null: false |
 | cost_id     | integer   | null: false |
+| place_id    | integer   | null: false |
 | day_id      | integer   | null: false |
 
 ### Association
