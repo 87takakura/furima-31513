@@ -17,7 +17,7 @@
 
 - has_many :items
 - has_many :comments
-- has_many :purchases
+- has_one :purchases
 
 ## items テーブル
 
@@ -37,8 +37,7 @@
 
 - belongs_to :user
 - has_many :comments
-- belongs_to :delivery_address
-- belongs_to :purchase
+- has_one :purchase
 
 
 
@@ -60,30 +59,25 @@
   
   | Column             | Type      | Options     |
   | ------------------ | --------- | ----------- |
-  | user_id            | reference | null: false, foreign_key:true |
-  | item_id            | reference | null: false, foreign_key:true |
-  | credit_card_number | integer   | null: false |
-  | expiration_date    | date      | null: false |
-  | security_code      | integer   | null: false |
+  | user               | reference | null: false, foreign_key:true |
+  | item               | reference | null: false, foreign_key:true |
   
   ### Association
   - belongs_to :user
-  - belongs_to :item
+
 
  
   ### delivery_addressテーブル  
   | Column           | Type      | Options     |
   | ---------------- | --------- | ----------- |
-  | user_id          | reference | null: false, foreign_key:true |
-  | item_id          | reference | null: false, foreign_key:true |
-  | post_code        | integer   | null: false |
-  | prefecture       | strings   | null: false |
-  | municipality     | text      | null: false |
-  | address          | text      | null: false |
-  | building         | text      | null: false |
-  | telephone_number | integer   | null: false |
- 
+  | post_code        | strings   | null: false |
+  | prefecture       | integer   | null: false |
+  | municipality     | strings   | null: false |
+  | address          | strings   | null: false |
+  | building         | strings   |
+  | telephone_number | strings   | null: false |
+  | purchase         | reference | null: false, foreign_key:true |
+
  ### Association
 
--belongs_to :item
-
+-has_one :purchase
