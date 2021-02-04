@@ -11,13 +11,13 @@
 | lastname           | string | null: false |
 | katakanafirstname  | string | null: false |
 | katakanalastname   | string | null: false |
-| birthday           | data   | null: false |
+| birthday           | date   | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :comments
-- has_one :purchases
+- has_one :purchase
 
 ## items テーブル
 
@@ -26,7 +26,7 @@
 | name        | string    | null: false |
 | information | text      | null: false |
 | price       | integer   | null: false |
-| user        | reference | null: false, foreign_key:true |
+| user        | references | null: false, foreign_key:true |
 | category_id | integer   | null: false |
 | state_id    | integer   | null: false |
 | cost_id     | integer   | null: false |
@@ -46,8 +46,8 @@
 | Column | Type      | Options     |
 | ------ | --------- | ----------- |
 | text   | text      | null: false |
-| user   | reference | null: false, foreign_key:true |
-| item   | reference | null: false, foreign_key:true |
+| user   | references | null: false, foreign_key:true |
+| item   | references | null: false, foreign_key:true |
 
 
 ### Association
@@ -59,25 +59,28 @@
   
   | Column             | Type      | Options     |
   | ------------------ | --------- | ----------- |
-  | user               | reference | null: false, foreign_key:true |
-  | item               | reference | null: false, foreign_key:true |
+  | user               | references | null: false, foreign_key:true |
+  | item               | references | null: false, foreign_key:true |
   
   ### Association
   - belongs_to :user
+
+  -belongs_to :items
+  -belongs_to :delivery_addresses
 
 
  
   ### delivery_addressテーブル  
   | Column           | Type      | Options     |
   | ---------------- | --------- | ----------- |
-  | post_code        | strings   | null: false |
-  | prefecture       | integer   | null: false |
-  | municipality     | strings   | null: false |
-  | address          | strings   | null: false |
-  | building         | strings   |
-  | telephone_number | strings   | null: false |
-  | purchase         | reference | null: false, foreign_key:true |
+  | post_code        | string  | null: false |
+  | place_id     | integer   | null: false |
+  | municipality     | string   | null: false |
+  | address          | string  | null: false |
+  | building         | string  |
+  | telephone_number | string | null: false |
+  | purchase         | references | null: false, foreign_key:true |
 
  ### Association
 
--has_one :purchase
+-belongs_to :purchase
