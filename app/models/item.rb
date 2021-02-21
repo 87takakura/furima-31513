@@ -1,4 +1,9 @@
 class Item < ApplicationRecord
+
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :validatable
+
+
   belongs_to :user
   has_many :comments
   has_one :purchase 
@@ -13,7 +18,7 @@ class Item < ApplicationRecord
 
 
 
-  validates :name, :information, :price, presence: true
+  validates :name, :information, :image, presence: true
 
   validates :category_id, numericality: { other_than: 1 }
   validates :state_id, numericality: { other_than: 1 }
@@ -21,6 +26,7 @@ class Item < ApplicationRecord
   validates :place_id, numericality: { other_than: 1 }
   validates :day_id, numericality: { other_than: 1 }
 
-
+  validates :price, numericality: { greater_than_or_equal_to: 300 }
+  validates :price, numericality: { less_than_or_equal_to: 9999999 }
 
 end

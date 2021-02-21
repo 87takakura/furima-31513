@@ -11,6 +11,5 @@ FactoryBot.define do
   katakanalastname {"タロウ"}
   birthday {"1111-11-11"}
   #新規登録/ユーザー情報
-
  end
 end
