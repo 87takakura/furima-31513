@@ -1,12 +1,12 @@
-class Item < ApplicationRecord
+# frozen_string_literal: true
 
+class Item < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :validatable
 
-
   belongs_to :user
   has_many :comments
-  has_one :purchase 
+  has_one :purchase
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -15,8 +15,6 @@ class Item < ApplicationRecord
   belongs_to :cost
   belongs_to :day
   belongs_to :place
-
-
 
   validates :name, :information, :image, presence: true
 
@@ -27,6 +25,5 @@ class Item < ApplicationRecord
   validates :day_id, numericality: { other_than: 1 }
 
   validates :price, numericality: { greater_than_or_equal_to: 300 }
-  validates :price, numericality: { less_than_or_equal_to: 9999999 }
-
+  validates :price, numericality: { less_than_or_equal_to: 9_999_999 }
 end
