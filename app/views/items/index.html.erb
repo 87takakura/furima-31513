@@ -139,8 +139,9 @@
           <%# //商品が売れていればsold outを表示しましょう %>
 
         </div>
-
-       <% @items.each do |item| %>
+       <%# 一覧表示機能で用いるため %>
+       <%# @items.each do |item| %>
+       <%# 一覧表示機能で用いるため %>
         <div class='item-info'>
           <h3 class='item-name'>
             <%= "商品名" %>
@@ -151,10 +152,11 @@
               <%= image_tag "star.png", class:"star-icon" %>
               <span class='star-count'>0</span>
             </div>
-            <% image_tag item.image.variant(resize: '500x500'), class: 'item-image' if item.image.attached? %>
+       <%# 一覧表示機能で用いるため %>
+            <%# image_tag item.image.variant(resize: '500x500'), class: 'item-image' if item.image.attached? %>
+       <%# 一覧表示機能で用いるため %>
           </div>
         </div>
-        <% end %>
         <% end %>
       </li>
       <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
@@ -188,4 +190,4 @@
   <span class='purchase-btn-text'>出品する</span>
   <%= image_tag 'icon_camera.png' , size: '185x50' ,class: "purchase-btn-icon" %>
 <% end %>
-<%= render "shared/footer" %>
+<%= render "shared/footer"%>

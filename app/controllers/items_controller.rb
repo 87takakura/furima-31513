@@ -3,7 +3,9 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
-    @items = Item.order('created_at DESC')
+    #商品一覧表示機能で用いるため
+    #@items = Item.order('created_at DESC')
+    #商品一覧表示機能で用いるため
   end
 
   def new
@@ -14,7 +16,6 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)    
      if @item.save
       redirect_to root_path
-      #(@user)
     else
       render :new
     end

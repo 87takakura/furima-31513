@@ -91,7 +91,60 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
+    end
 
+
+
+
+    context '出品できるとき' do
+      it 'imageが存在すれば保存できる' do
+        expect(@item).to be_valid
+      end
+
+      it 'nameが存在すれば保存できる' do
+        @item.name = 'aあ1'
+        expect(@item).to be_valid
+      end
+
+      it 'informationが存在すれば保存できる' do
+        @item.information = 'aあ1'
+        expect(@item).to be_valid
+      end
+
+      it 'categoryのidが2~10なら保存できる' do
+        @item.category_id = 2
+        expect(@item).to be_valid
+      end
+
+      it 'stateのidが2~6なら保存できる' do
+        @item.state_id = 2
+        expect(@item).to be_valid
+      end
+
+      it 'costのidがidが2~3なら保存できる' do
+        @item.cost_id = 2
+        expect(@item).to be_valid
+      end
+
+      it 'placeのidが2~48なら保存できる' do
+        @item.place_id = 2
+        expect(@item).to be_valid
+      end
+
+      it 'dayのidが2~4なら保存できる' do
+        @item.day_id = 2
+        expect(@item).to be_valid
+      end
+
+      it 'priceは300以上、9999999以下であれば保存できる' do
+        @item.price = 1000
+        expect(@item).to be_valid
+      end
+
+      it 'priceは数字のみであれば保存できる' do
+        @item.price = 1000
+        expect(@item).to be_valid
+      end
     end
    end
 end
