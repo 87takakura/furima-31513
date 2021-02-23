@@ -26,6 +26,7 @@ RSpec.describe User, type: :model do
      @user.password = @user.password_confirmation
      expect(@user).to be_valid   
     end
+   end 
    context '新規登録できないとき' do      
      it 'ニックネームが空では登録できない' do
       @user.nickname = ''
@@ -55,7 +56,7 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
      end
-   
+   end
   #本人確認情報のexampleの整理
   context '新規登録できるとき' do
     it 'ユーザー本名は、全角（漢字・ひらがな・カタカナ）であれば登録できる' do
@@ -68,6 +69,7 @@ RSpec.describe User, type: :model do
       @user.lastname = '亜あア'
       expect(@user).to be_valid
     end
+  end
   context '新規登録できないとき' do 
    it 'firstnameが存在しなければ登録できない' do
      @user.firstname = ''
@@ -94,5 +96,6 @@ RSpec.describe User, type: :model do
      @user.valid?
      expect(@user.errors.full_messages).to include("Birthday can't be blank")
    end
+  end
  end
 end

@@ -26,4 +26,8 @@ class Item < ApplicationRecord
 
   validates :price, numericality: { greater_than_or_equal_to: 300 }
   validates :price, numericality: { less_than_or_equal_to: 9_999_999 }
+
+  def was_attached?
+    self.image.attached?
+  end
 end
