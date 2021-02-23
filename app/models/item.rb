@@ -19,6 +19,7 @@ class Item < ApplicationRecord
    validates :name
    validates :information
    validates :image
+   validates :price
   end
   
   with_options numericality: { other_than:1, message: "Select" } do

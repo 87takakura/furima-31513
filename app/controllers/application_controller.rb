@@ -9,6 +9,5 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: %i[nickname password lastname firstname
                                                katakanalastname katakanafirstname birthday])
-    # devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :encrypted_password, :password])
   end
 end
