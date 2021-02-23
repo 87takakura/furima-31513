@@ -56,12 +56,18 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Day Select")
       end
 
-      it 'priceは300から9999999の間でなければ保存できない' do
+      it 'priceは300以上でなければ保存できない' do
         @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
- 
+
+      it 'priceは9999999以下でなければ保存できない' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+
       it 'priceは空では登録できない' do
         @item.price = ''
         @item.valid?
