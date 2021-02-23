@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :item do
     name { 'サンプル商品' }
     information { 'あああああ' }
-    price { Faker::Number.number(7) }
+    price { 1000 }
     category_id { 2 }
     state_id { 2 }
     cost_id { 2 }

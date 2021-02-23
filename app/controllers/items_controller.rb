@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [:new, :create]
   def index
     @items = Item.order('created_at DESC')
   end
@@ -11,10 +11,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-   # Item.create(item_params)
-    #@item = @user.items.new(item_params)
-     #@item = Item.find(params[:item_id])
-
     @item = Item.new(item_params)    
      if @item.save
       redirect_to root_path
@@ -31,9 +27,3 @@ class ItemsController < ApplicationController
                                  :day_id, :image).merge(user_id: current_user.id)
   end
 end
-
-# if @item.save
-# redirect_to root_path
-# else
-# render :new
-# end
