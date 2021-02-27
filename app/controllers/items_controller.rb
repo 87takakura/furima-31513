@@ -3,10 +3,18 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   def index
-    #商品一覧表示機能で用いるため
     @items = Item.order('created_at DESC')
-    #商品一覧表示機能で用いるため
+
+    #@items = Item.new(item_params)
+    #render :new if @item.invalid?
   end
+
+ 
+
+
+
+
+
 
   def new
     @item = Item.new
