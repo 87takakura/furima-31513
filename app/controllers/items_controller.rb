@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :move_to_index, only: [:edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :move_to_index, only: [:edit, :update]
   def index
     @items = Item.order('created_at DESC')
 
@@ -12,16 +13,13 @@ class ItemsController < ApplicationController
 
  
   def show
-    @item = Item.find(params[:id])
   end
 
 
  def edit
-  @item = Item.find(params[:id])
  end
 
  def update
-   item = Item.find(params[:id])
    item.update(item_params)
 
   if item.update(item_params)
@@ -50,6 +48,10 @@ class ItemsController < ApplicationController
 
   private
 
+  def set_item
+   @item = Item.find(params[:id])
+  end
+
   def item_params
     params.require(:item).permit(:name, :information, :user_id, :price, :category_id, :state_id, :cost_id, :place_id,
                                  :day_id, :image).merge(user_id: current_user.id)
@@ -57,7 +59,7 @@ class ItemsController < ApplicationController
 
   def move_to_index
    @item = Item.find(params[:id])
-    unless current_user == @item.user_id
+    unless current_user == @item.user
       redirect_to root_path
     end
   end   
