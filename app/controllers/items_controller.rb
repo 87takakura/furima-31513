@@ -44,7 +44,6 @@ class ItemsController < ApplicationController
     end
   end
 
-
   def destroy
     @item.destroy
     if @item.destroy
