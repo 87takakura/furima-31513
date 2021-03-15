@@ -11,10 +11,8 @@ class ItemsController < ApplicationController
     #render :new if @item.invalid?
   end
 
- 
   def show
   end
-
 
  def edit
  end
@@ -26,10 +24,7 @@ class ItemsController < ApplicationController
     render :edit
   end
 
-
-
  end
-
 
   def new
     @item = Item.new
@@ -49,7 +44,7 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       redirect_to root_path
-    end
+      end
   end
 
   private
@@ -59,7 +54,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :information, :user_id, :price, :category_id, :state_id, :cost_id, :place_id,
+    params.require(:item).permit(:name, :information, :price, :category_id, :state_id, :cost_id, :place_id,
                                  :day_id, :image).merge(user_id: current_user.id)
   end
 
