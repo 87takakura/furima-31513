@@ -4,7 +4,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_many :comments
-  has_one :orders
+  has_one :order
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions

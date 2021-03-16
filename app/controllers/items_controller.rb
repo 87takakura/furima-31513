@@ -12,6 +12,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    order = Order.new
+
   end
 
  def edit
@@ -64,4 +66,9 @@ class ItemsController < ApplicationController
     end
   end   
  
+  #def order_params
+   # params.require(:order).permit(:item_id)
+   #end
+  
+
 end
