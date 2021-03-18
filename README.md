@@ -37,7 +37,7 @@
 
 - belongs_to :user
 - has_many :comments
-- has_one :orders
+- has_one :order
 
 
 
@@ -82,4 +82,4 @@
 
  ### Association
 
--belongs_to :orders
+-belongs_to :order

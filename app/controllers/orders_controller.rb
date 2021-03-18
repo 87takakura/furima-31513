@@ -1,11 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]#未ログインユーザーをログインページへ転送
-  #before_action :move_to_index, only: [:index, :create]#トップページに遷移させる
+  before_action :set_item, only: [:index, :create]
 
-  
 
 def index
-  @item = Item.find(params[:item_id])
   @order_delivery_address = OrderDeliveryAddress.new
   if current_user == @item.user 
     redirect_to root_path    
@@ -16,7 +14,6 @@ def index
 end
 
 def create
-  @item = Item.find(params[:item_id])
   @order_delivery_address = OrderDeliveryAddress.new(order_delivery_address_params)
   if @order_delivery_address.valid?
     pay_item
@@ -33,7 +30,7 @@ private
 
 
  def order_delivery_address_params
-  params.require(:order_delivery_address).permit(:post_code, :place_id, :municipality, :address, :building, :telephone_number, :order_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  params.require(:order_delivery_address).permit(:post_code, :place_id, :municipality, :address, :building, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
  end
 
 
@@ -46,13 +43,8 @@ private
     )
  end
 
-
-# def move_to_index
- # @order = Order.new
-  #if @item.order.present?
-   # redirect_to root_path
-  #end
- #end
-
+ def set_item
+  @item = Item.find(params[:item_id])
+ end
 
 end

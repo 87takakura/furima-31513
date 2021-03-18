@@ -17,6 +17,8 @@ class OrderDeliveryAddress
  with_options presence: true do
   validates :address
   validates :telephone_number, format: { with: /\A\d{11}\z/, message: "input only number" }
+  validates :item_id
+  validates :user_id
  end
 
 
