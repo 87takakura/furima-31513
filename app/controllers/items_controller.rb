@@ -1,38 +1,32 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :set_item, only: %i[show edit update destroy]
+  before_action :move_to_index, only: %i[edit update destroy]
   def index
     @items = Item.order('created_at DESC')
-
-    #@items = Item.new(item_params)
-    #render :new if @item.invalid?
   end
 
-  def show
+  def show; end
+
+  def edit; end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path
+    else
+      render :edit
+    end
   end
-
- def edit
- end
-
- def update
-  if @item.update(item_params)
-    redirect_to item_path
-  else
-    render :edit
-  end
-
- end
 
   def new
     @item = Item.new
   end
 
   def create
-    @item = Item.new(item_params)    
-     if @item.save
+    @item = Item.new(item_params)
+    if @item.save
       redirect_to root_path
     else
       render :new
@@ -44,13 +38,13 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       redirect_to root_path
-      end
+    end
   end
 
   private
 
   def set_item
-   @item = Item.find(params[:id])
+    @item = Item.find(params[:id])
   end
 
   def item_params
@@ -60,15 +54,9 @@ class ItemsController < ApplicationController
 
   def move_to_index
     if @item.order.present?
-      redirect_to root_path 
+      redirect_to root_path
     elsif current_user != @item.user
-      redirect_to root_path 
+      redirect_to root_path
     end
-  end   
- 
-  #def order_params
-   # params.require(:order).permit(:item_id)
-   #end
-  
-
+  end
 end
