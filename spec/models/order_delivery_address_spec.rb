@@ -82,4 +82,4 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       expect(@order_delivery_address.errors.full_messages).to include("Item can't be blank")
     end
   end
-end
+　end

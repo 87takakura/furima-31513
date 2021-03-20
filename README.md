@@ -82,4 +82,4 @@
 
  ### Association
 
--belongs_to :order
+-belongs_to :orders
