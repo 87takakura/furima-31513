@@ -7,9 +7,10 @@ class OrderDeliveryAddress
     validates :post_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'input correctly' }
     validates :municipality
     validates :address
-    validates :telephone_number, format: { with: /\A\d{11}\z/, message: 'input only number' }
-    validates :item_id
+    validates :telephone_number, format: { with: /\A[0-9]+\z/, message: 'input only number' }
+    validates :telephone_number, length: { maximum: 11 }
     validates :user_id
+    validates :item_id
   end
 
   with_options numericality: { other_than: 1, message: 'Select' } do
