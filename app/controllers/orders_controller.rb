@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :move_to_index, omly: %i[index create]
 
   def index
-   @order_delivery_address = OrderDeliveryAddress.new
+    @order_delivery_address = OrderDeliveryAddress.new
   end
 
   def create
@@ -25,13 +25,13 @@ class OrdersController < ApplicationController
                                                                                                                                        token: params[:token])
   end
 
- def order_delivery_address_params
-  params.require(:order_delivery_address).permit(:post_code, :place_id, :municipality, :address, :building, :telephone_number, :order_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
- end
+  def order_delivery_address_params
+    params.require(:order_delivery_address).permit(:post_code, :place_id, :municipality, :address, :building, :telephone_number, :order_id).merge(user_id: current_user.id, item_id: params[:item_id],
+                                                                                                                                                  token: params[:token])
+  end
 
-
- def pay_item
-  Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
+  def pay_item
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price, # 商品の値段
       card: order_delivery_address_params[:token], # カードトークン
@@ -39,17 +39,11 @@ class OrdersController < ApplicationController
     )
   end
 
-
   def set_item
     @item = Item.find(params[:item_id])
   end
 
   def move_to_index
-    if current_user == @item.user || @item.order.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user == @item.user || @item.order.present?
   end
-
-
-
 end
