@@ -29,72 +29,69 @@ RSpec.describe Item, type: :model do
       it 'categoryのidが1では保存できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category Select")
+        expect(@item.errors.full_messages).to include('Category Select')
       end
 
       it 'stateのidが1では保存できない' do
         @item.state_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("State Select")
+        expect(@item.errors.full_messages).to include('State Select')
       end
 
       it 'costのidが1では保存できない' do
         @item.cost_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Cost Select")
+        expect(@item.errors.full_messages).to include('Cost Select')
       end
 
       it 'placeのidが1では保存できない' do
         @item.place_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Place Select")
+        expect(@item.errors.full_messages).to include('Place Select')
       end
 
       it 'dayのidが1では保存できない' do
         @item.day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Day Select")
+        expect(@item.errors.full_messages).to include('Day Select')
       end
 
       it 'priceは300以上でなければ保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
 
       it 'priceは9999999以下でなければ保存できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
 
       it 'priceは空では登録できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
- 
+
       it 'priceは全角文字では登録できない' do
         @item.price = 'A'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
-   
+
       it 'priceは半角英数混合では登録できない' do
         @item.price = 'a1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
-    
+
       it 'priceは半角英語だけでは登録できない' do
         @item.price = 'aa'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
     end
-
-
-
 
     context '出品できるとき' do
       it 'imageが存在すれば保存できる' do
@@ -146,5 +143,5 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
     end
-   end
+  end
 end

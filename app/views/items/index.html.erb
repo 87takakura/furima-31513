@@ -129,8 +129,15 @@
        <% @items.each do |item| %>
         <div class='item-info'>
         <%= link_to item_path (item.id) do %>
+         <div class='item-img-content'>
+
         <%= image_tag item.image.variant(resize: '400x400'), class: 'item-image' if item.image.attached? %>
-          <h3 class='item-name'>
+        <% if item.order.present? %> 
+         <div class="sold-out">
+           <span>Sold Out!!</span>
+         </div>
+         <% end %>
+         <h3 class='item-name'>
             <%= item.name %>
           </h3>
           <div class='item-price'>
@@ -142,6 +149,8 @@
        <% end %> 
           </div>
         </div>
+          </div>
+
         <% end %>
 
 
