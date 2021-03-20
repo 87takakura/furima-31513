@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe OrderDeliveryAddress, type: :model do
   before do
     @order_delivery_address = FactoryBot.build(:order_delivery_address)
+    sleep 1
   end
 
   describe '商品購入機能' do
@@ -17,8 +18,8 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       end
 
       it 'tokenがあれば保存ができること' do
-        expect(@order_delivery_address).to be_valid
         @order_delivery_address.token = 'aaaaaaaa'
+        expect(@order_delivery_address).to be_valid
       end
     end
 
@@ -42,6 +43,11 @@ RSpec.describe OrderDeliveryAddress, type: :model do
         @order_delivery_address.place_id = 1
         @order_delivery_address.valid?
         expect(@order_delivery_address.errors.full_messages).to include('Place Select')
+      end  
+      it 'municipalityが存在しなければ保存できない' do
+        @order_delivery_address.municipality = ''
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("Municipality can't be blank")
       end
       it 'addressが空だと保存できない' do
         @order_delivery_address.address = ''
