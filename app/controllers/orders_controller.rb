@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: %i[index create] # 未ログインユーザーをログインページへ転送
   before_action :set_item, only: %i[index create]
-  before_action :move_to_index, omly: %i[index create]
+  before_action :move_to_index, only: %i[index create]
 
   def index
     @order_delivery_address = OrderDeliveryAddress.new
